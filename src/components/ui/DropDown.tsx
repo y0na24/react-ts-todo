@@ -1,23 +1,53 @@
 import { FC, useState } from 'react'
+
 import Input from './Input'
 import InputGroup from './InputGroup'
 import CounterButton from './Buttons/CounterButton'
-import { downArrow } from '../../assets'
+import OptionList from './OptionList'
+import OptionItem from './OptionItem'
+
 import { cn } from '../../helpers/cn'
+import { Option } from '../../models/IOptions'
+import { downArrow } from '../../assets'
 
-interface DropDownProps {}
+interface DropDownProps {
+	inputValue: string
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+	changeOptionValue: (title: string) => void
+}
 
-const DropDown: FC<DropDownProps> = ({}) => {
+const options: Option[] = [
+	{ title: 'Subscribed', id: 1 },
+	{ title: 'Not subscribed', id: 2 },
+	{ title: 'Other', id: 3 },
+]
+
+const DropDown: FC<DropDownProps> = ({
+	inputValue,
+	onChange,
+	changeOptionValue,
+}) => {
 	const [isMenuVisible, setIsMenuVisible] = useState(false)
 
 	const handleClick = () => {
 		setIsMenuVisible(!isMenuVisible)
 	}
 
+	const handleOptionChange = (value: string) => {
+		changeOptionValue(value)
+		setIsMenuVisible(false)
+	}
+
 	return (
 		<div className='relative'>
 			<InputGroup>
-				<Input className='rounded-r-none' placeholder='adsfdsf' />
+				<Input
+					onChange={onChange}
+					value={inputValue}
+					name='option'
+					className='rounded-r-none'
+					placeholder='Choose an option'
+				/>
 				<CounterButton
 					onClick={handleClick}
 					className='rounded-r-md'
@@ -30,42 +60,16 @@ const DropDown: FC<DropDownProps> = ({}) => {
 					{ block: isMenuVisible }
 				)}
 			>
-				<ul
-					className='py-2 text-sm text-gray-700 dark:text-gray-200'
-				>
-					<li>
-						<a
-							href='#'
-							className='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'
-						>
-							Dashboard
-						</a>
-					</li>
-					<li>
-						<a
-							href='#'
-							className='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'
-						>
-							Settings
-						</a>
-					</li>
-					<li>
-						<a
-							href='#'
-							className='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'
-						>
-							Earnings
-						</a>
-					</li>
-					<li>
-						<a
-							href='#'
-							className='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'
-						>
-							Sign out
-						</a>
-					</li>
-				</ul>
+				<OptionList
+					options={options}
+					renderOption={option => (
+						<OptionItem
+							key={option.id}
+							option={option}
+							setOptionValue={handleOptionChange}
+						/>
+					)}
+				/>
 			</div>
 		</div>
 	)

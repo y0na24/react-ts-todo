@@ -10,12 +10,31 @@ import { FormData } from '../models/IFormData'
 import { upArrow } from '../assets'
 import { downArrow } from '../assets'
 import DropDown from './ui/DropDown'
+import CheckBox from './ui/CheckBox'
+import Button from './ui/Buttons/Button'
+import Line from './ui/Line'
 
 const ToDoList: FC = () => {
 	const [formData, setFormData] = useState<FormData>({
 		name: 'Name',
 		age: 'Age',
+		option: 'Subscribed',
+		isEmployed: false,
 	})
+
+	const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setFormData(prev => ({
+			...prev,
+			isEmployed: e.target.checked,
+		}))
+	}
+
+	const changeOptionValue = (title: string) => {
+		setFormData(prev => ({
+			...prev,
+			option: title,
+		}))
+	}
 
 	const incrementAge = () => {
 		if (typeof formData.age === 'string') {
@@ -86,8 +105,18 @@ const ToDoList: FC = () => {
 						onClick={incrementAge}
 					/>
 				</InputGroup>
-					<DropDown />
-				<button onClick={hanldeSubmit}>Click</button>
+				<DropDown
+					inputValue={formData.option}
+					onChange={handleChange}
+					changeOptionValue={changeOptionValue}
+				/>
+				<CheckBox
+					checked={formData.isEmployed}
+					onChange={handleCheckboxChange}
+				/>
+				<Button title='Insert' />
+				<Line />
+				<Button title='Delete'/>
 			</Wrapper>
 		</div>
 	)

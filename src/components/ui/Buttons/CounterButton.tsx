@@ -1,7 +1,8 @@
 import { forwardRef } from 'react'
 import { cn } from '../../../helpers/cn'
 
-interface CounterButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+interface CounterButtonProps
+	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	arrowImage: string
 }
 

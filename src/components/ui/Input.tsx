@@ -9,7 +9,7 @@ const Input = forwardRef<HTMLInputElement, TextFieldProps>(
 			<input
 				type={type || 'text'}
 				className={cn(
-					'text-sm w-full border border-grey py-2 px-3 rounded-md bg-transparent focus-visible:outline-none placeholder:text-sm',
+					'text-sm w-full border border-grey py-2 px-3 rounded-md bg-transparent focus:ring-0 focus:ring-offset-0 focus:border-grey placeholder:text-sm',
 					className
 				)}
 				ref={ref}
