@@ -7,7 +7,9 @@ import OptionList from './OptionList'
 import OptionItem from './OptionItem'
 
 import { cn } from '../../helpers/cn'
+
 import { Option } from '../../models/IOptions'
+
 import { downArrow } from '../../assets'
 
 interface DropDownProps {
@@ -36,6 +38,10 @@ const DropDown: FC<DropDownProps> = ({
 	const handleOptionChange = (value: string) => {
 		changeOptionValue(value)
 		setIsMenuVisible(false)
+	}
+
+	const isOptionActive = (title: string) => {
+		return title.toLowerCase() === inputValue.toLowerCase()
 	}
 
 	return (
@@ -67,6 +73,7 @@ const DropDown: FC<DropDownProps> = ({
 							key={option.id}
 							option={option}
 							setOptionValue={handleOptionChange}
+							isActive={isOptionActive(option.title)}
 						/>
 					)}
 				/>

@@ -26,8 +26,22 @@ export const UsersProvider: FC<UsersProviderProps> = ({ children }) => {
 		{
 			name: 'Matvey',
 			age: 20,
-			id: null,
-			isEmployed: false,
+			id: 333,
+			isEmployed: 'Employed',
+			option: 'Subscribed',
+		},
+		{
+			name: 'Matvey',
+			age: 20,
+			id: 222,
+			isEmployed: 'Not Employed',
+			option: 'Subscribed',
+		},
+		{
+			name: 'Matvey',
+			age: 20,
+			id: 555,
+			isEmployed: 'Employed',
 			option: 'Subscribed',
 		},
 	])

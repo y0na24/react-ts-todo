@@ -9,6 +9,7 @@ export default {
       primary: '#313131',
       secondary: '#007541',
       grey: '#595959',
+      lightGrey: '#cccc',
       white: colors.white,
       transparent: colors.transparent
     },

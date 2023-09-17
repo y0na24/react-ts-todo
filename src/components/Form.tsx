@@ -27,7 +27,7 @@ const Form: FC = () => {
 		age: 'Age',
 		option: 'Subscribed',
 		isEmployed: false,
-		id: null
+		id: null,
 	})
 
 	const toggleDarkMode = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,11 +87,15 @@ const Form: FC = () => {
 	}
 
 	const hanldeSubmit = () => {
-		const data = {
-			...formData,
-			id: Date.now()
+		if (typeof +formData.age === 'number' && !isNaN(+formData.age)) {
+			const data = {
+				...formData,
+				age: +formData.age,
+				isEmployed: formData.isEmployed ? 'Subscribed' : 'Not subscribed',
+				id: Date.now(),
+			}
+			console.log(data)
 		}
-		console.log(data)
 	}
 	return (
 		<Wrapper className='basis-[30%]'>
@@ -125,7 +129,10 @@ const Form: FC = () => {
 				onChange={handleChange}
 				changeOptionValue={changeOptionValue}
 			/>
-			<CheckBox checked={formData.isEmployed} onChange={handleCheckboxChange} />
+			<CheckBox
+				checked={formData.isEmployed as boolean}
+				onChange={handleCheckboxChange}
+			/>
 			<Button title='Insert' onClick={hanldeSubmit} />
 			<Line />
 			<Switcher label='Mode' onChange={toggleDarkMode} checked={isDarkSide} />
