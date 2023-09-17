@@ -16,19 +16,24 @@ import useDarkSide from '../hooks/useDarkMode'
 
 import { upArrow } from '../assets'
 import { downArrow } from '../assets'
+import { useUsers } from '../hooks/useUsers'
+
+const initialValue = {
+	name: 'Name',
+	age: 'Age',
+	option: 'Subscribed',
+	isEmployed: false,
+	id: null,
+}
 
 const Form: FC = () => {
 	const [colorTheme, setTheme] = useDarkSide()
 	const [isDarkSide, setIsDarkSide] = useState(
 		colorTheme === 'light' ? true : false
 	)
-	const [formData, setFormData] = useState<FormData>({
-		name: 'Name',
-		age: 'Age',
-		option: 'Subscribed',
-		isEmployed: false,
-		id: null,
-	})
+	const [formData, setFormData] = useState<FormData>(initialValue)
+
+	const { addUser, deleteUser } = useUsers()
 
 	const toggleDarkMode = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setTheme(colorTheme)
@@ -86,17 +91,19 @@ const Form: FC = () => {
 		}))
 	}
 
-	const hanldeSubmit = () => {
+	const hanldeAddUser = () => {
 		if (typeof +formData.age === 'number' && !isNaN(+formData.age)) {
-			const data = {
+			const data: FormData = {
 				...formData,
 				age: +formData.age,
-				isEmployed: formData.isEmployed ? 'Subscribed' : 'Not subscribed',
+				isEmployed: formData.isEmployed ? 'Employed' : 'Not Employed',
 				id: Date.now(),
 			}
-			console.log(data)
+			addUser(data)
+			setFormData(initialValue)
 		}
 	}
+
 	return (
 		<Wrapper className='basis-[30%]'>
 			<Input
@@ -133,7 +140,7 @@ const Form: FC = () => {
 				checked={formData.isEmployed as boolean}
 				onChange={handleCheckboxChange}
 			/>
-			<Button title='Insert' onClick={hanldeSubmit} />
+			<Button title='Insert' onClick={hanldeAddUser} />
 			<Line />
 			<Switcher label='Mode' onChange={toggleDarkMode} checked={isDarkSide} />
 			<Button title='Delete' />

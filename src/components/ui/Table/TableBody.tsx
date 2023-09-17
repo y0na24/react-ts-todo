@@ -1,8 +1,10 @@
 import { FC } from 'react'
 
+import { FormData } from '../../../models/IFormData'
+
 interface TableBodyProps {
-  usersList: any 
-  renderRow: (users) => JSX.Element
+  usersList: FormData[] 
+  renderRow: (user: FormData) => JSX.Element
 }
 
 const TableBody: FC<TableBodyProps> = ({usersList, renderRow}) => {
