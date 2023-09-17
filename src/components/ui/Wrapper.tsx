@@ -1,12 +1,19 @@
 import { FC, ReactNode } from 'react'
+import { cn } from '../../helpers/cn'
 
-interface WrapperProps {
+interface WrapperProps extends React.HTMLAttributes<HTMLDivElement> {
 	children: ReactNode
 }
 
-const Wrapper: FC<WrapperProps> = ({ children }) => {
+const Wrapper: FC<WrapperProps> = ({ children, className, ...props }) => {
 	return (
-		<div className='flex flex-col gap-5 rounded-sm max-w-[35%] p-2 border-grey border'>
+		<div
+			className={cn(
+				'flex flex-col h-fit gap-5 rounded-sm p-2 border-grey border',
+				className
+			)}
+			{...props}
+		>
 			{children}
 		</div>
 	)

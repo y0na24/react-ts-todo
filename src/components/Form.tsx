@@ -27,6 +27,7 @@ const Form: FC = () => {
 		age: 'Age',
 		option: 'Subscribed',
 		isEmployed: false,
+		id: null
 	})
 
 	const toggleDarkMode = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,10 +87,14 @@ const Form: FC = () => {
 	}
 
 	const hanldeSubmit = () => {
-		console.log(formData)
+		const data = {
+			...formData,
+			id: Date.now()
+		}
+		console.log(data)
 	}
 	return (
-		<Wrapper>
+		<Wrapper className='basis-[30%]'>
 			<Input
 				onChange={handleChange}
 				name='name'
