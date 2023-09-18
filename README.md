@@ -1,7 +1,7 @@
 
 <h1 align="center" id="title">Test Task</h1>
 
-<p id="description"></p>
+<p id="description">To do list (desktop and tablet)</p>
   
 <h2>💻 Technologies</h2>
 
