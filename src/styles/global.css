@@ -6,7 +6,7 @@
 
 
 body {
-	@apply flex justify-center items-center min-h-screen text-white;
+	@apply flex justify-center items-center min-h-screen text-white bg-primary;
 	font-family: 'Montserrat', sans-serif;
 }
 
@@ -20,18 +20,17 @@ input[type='number'] {
 	-moz-appearance: textfield;
 }
 
-::-webkit-scrollbar {
-	width: 10px;
+.scroll::-webkit-scrollbar {
+	@apply w-[10px];
 }
 
 /* Track */
-::-webkit-scrollbar-track {
+.scroll::-webkit-scrollbar-track {
 	@apply bg-grey;
 }
 
 /* Handle */
-::-webkit-scrollbar-thumb {
-	@apply bg-secondary;
-	border-radius: 5px;
+.scroll::-webkit-scrollbar-thumb {
+	@apply bg-secondary rounded;
 	
 }

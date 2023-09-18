@@ -13,8 +13,10 @@ interface UsersContextInitialState {
 	activeId: number | null
 }
 
+const intialUsers: FormData[] = JSON.parse(localStorage.getItem('users')!) || []
+
 const UsersContext = createContext<UsersContextInitialState>({
-	users: [],
+	users: intialUsers,
 	addUser: () => {},
 	deleteUser: () => {},
 	setActiveId: () => {},
@@ -27,31 +29,24 @@ export const useUsers: () => UsersContextInitialState = () => {
 
 export const UsersProvider: FC<UsersProviderProps> = ({ children }) => {
 	const [activeId, setActiveId] = useState<number | null>(null)
-	const [users, setUsers] = useState<FormData[]>([
-		{
-			name: 'Matvey',
-			age: 20,
-			id: 333,
-			isEmployed: 'Employed',
-			option: 'Subscribed',
-		},
-		{
-			name: 'Matvey',
-			age: 20,
-			id: 222,
-			isEmployed: 'Not Employed',
-			option: 'Subscribed',
-		},
-	])
+	const [users, setUsers] = useState<FormData[]>(intialUsers)
 
 	const addUser = (data: FormData) => {
-		setUsers(prev => [...prev, data])
+		const newUsers = [...users, data]
+		setUsers(newUsers)
+		localStorage.setItem('users', JSON.stringify(newUsers))
 	}
 
 	const deleteUser = (id: number) => {
 		const filteredUsers = users.filter(user => user.id !== id)
 
 		setUsers(filteredUsers)
+
+		if (filteredUsers.length > 0) {
+			localStorage.setItem('users', JSON.stringify(filteredUsers))
+		} else {
+			localStorage.removeItem('users')
+		}
 	}
 
 	const value = {

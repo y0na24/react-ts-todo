@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 
 import Form from './Form'
 import Wrapper from './ui/Wrapper'
@@ -14,12 +14,10 @@ const headings = ['Name', 'Age', 'Subscription', 'Employment']
 const ToDoList: FC = () => {
 	const { users, activeId, setActiveId } = useUsers()
 
-	console.log(users)
-
 	return (
-		<div className='flex gap-10 bg-primary px-10 py-3 rounded-md h-[750px] dark:bg-white dark:text-primary'>
+		<div className='flex flex-col md:flex-row gap-10 bg-primary px-10 py-3 rounded-md h-[750px] dark:bg-white dark:text-primary'>
 			<Form />
-			<Wrapper className='basis-[70%] max-h-[550px] overflow-auto'>
+			<Wrapper className='md:basis-[70%] max-h-[550px] overflow-y-auto scroll p-0'>
 				<Table
 					renderHead={() => (
 						<TableHead

@@ -7,7 +7,7 @@ interface TableHeadProps {
 
 const TableHead: FC<TableHeadProps> = ({ headings, renderRow }) => {
 	return (
-		<thead className='text-xs bg-grey dark:bg-lightGrey'>
+		<thead className='text-xs bg-grey dark:bg-lightGrey sticky top-0'>
 			{renderRow(headings)}
 		</thead>
 	)
