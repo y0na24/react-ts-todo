@@ -33,7 +33,7 @@ const Form: FC = () => {
 	)
 	const [formData, setFormData] = useState<FormData>(initialValue)
 
-	const { addUser, deleteUser } = useUsers()
+	const { addUser, deleteUser, activeId, setActiveId } = useUsers()
 
 	const toggleDarkMode = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setTheme(colorTheme)
@@ -91,7 +91,7 @@ const Form: FC = () => {
 		}))
 	}
 
-	const hanldeAddUser = () => {
+	const handleAddUser = () => {
 		if (typeof +formData.age === 'number' && !isNaN(+formData.age)) {
 			const data: FormData = {
 				...formData,
@@ -101,6 +101,13 @@ const Form: FC = () => {
 			}
 			addUser(data)
 			setFormData(initialValue)
+		}
+	}
+
+	const handleDeleteUser = () => {
+		if (typeof activeId === 'number') {
+			deleteUser(activeId)
+			setActiveId(null)
 		}
 	}
 
@@ -140,10 +147,10 @@ const Form: FC = () => {
 				checked={formData.isEmployed as boolean}
 				onChange={handleCheckboxChange}
 			/>
-			<Button title='Insert' onClick={hanldeAddUser} />
+			<Button title='Insert' onClick={handleAddUser} />
 			<Line />
 			<Switcher label='Mode' onChange={toggleDarkMode} checked={isDarkSide} />
-			<Button title='Delete' />
+			<Button title='Delete' onClick={handleDeleteUser} />
 		</Wrapper>
 	)
 }

@@ -9,12 +9,16 @@ interface UsersContextInitialState {
 	users: FormData[] | []
 	addUser: (data: FormData) => void
 	deleteUser: (id: number) => void
+	setActiveId: (id: number | null) => void
+	activeId: number | null
 }
 
 const UsersContext = createContext<UsersContextInitialState>({
 	users: [],
 	addUser: () => {},
 	deleteUser: () => {},
+	setActiveId: () => {},
+	activeId: null,
 })
 
 export const useUsers: () => UsersContextInitialState = () => {
@@ -22,6 +26,7 @@ export const useUsers: () => UsersContextInitialState = () => {
 }
 
 export const UsersProvider: FC<UsersProviderProps> = ({ children }) => {
+	const [activeId, setActiveId] = useState<number | null>(null)
 	const [users, setUsers] = useState<FormData[]>([
 		{
 			name: 'Matvey',
@@ -35,13 +40,6 @@ export const UsersProvider: FC<UsersProviderProps> = ({ children }) => {
 			age: 20,
 			id: 222,
 			isEmployed: 'Not Employed',
-			option: 'Subscribed',
-		},
-		{
-			name: 'Matvey',
-			age: 20,
-			id: 555,
-			isEmployed: 'Employed',
 			option: 'Subscribed',
 		},
 	])
@@ -60,6 +58,8 @@ export const UsersProvider: FC<UsersProviderProps> = ({ children }) => {
 		users,
 		addUser,
 		deleteUser,
+		activeId,
+		setActiveId,
 	}
 
 	return <UsersContext.Provider value={value}>{children}</UsersContext.Provider>

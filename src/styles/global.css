@@ -4,6 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 body {
 	@apply flex justify-center items-center min-h-screen text-white;
 	font-family: 'Montserrat', sans-serif;
@@ -17,4 +18,20 @@ input::-webkit-inner-spin-button {
 
 input[type='number'] {
 	-moz-appearance: textfield;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	@apply bg-grey;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	@apply bg-secondary;
+	border-radius: 5px;
+	
 }

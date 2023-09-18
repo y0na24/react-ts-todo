@@ -8,7 +8,7 @@ interface OptionListProps {
 
 const OptionList: FC<OptionListProps> = ({ options, renderOption }) => {
 	return (
-		<ul className='py-2 text-sm text-gray-700 dark:text-gray-200'>
+		<ul className='py-2 text-sm dark:bg-lightGrey'>
 			{options.map(option => renderOption(option))}
 		</ul>
 	)
