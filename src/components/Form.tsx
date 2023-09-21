@@ -112,7 +112,7 @@ const Form: FC = () => {
 	}
 
 	return (
-		<Wrapper className='basis-[30%]'>
+		<Wrapper className='basis-[30%]' label='Insert Row'>
 			<Input
 				onChange={handleChange}
 				name='name'
