@@ -20,7 +20,7 @@ const Wrapper: FC<WrapperProps> = ({
 			)}
 			{...props}
 		>
-			<span className='text-xs absolute top-[-10px]'>{label}</span>
+			<span className='text-xs absolute top-[-10px] z-50 dark:bg-white'>{label}</span>
 			{children}
 		</div>
 	)
